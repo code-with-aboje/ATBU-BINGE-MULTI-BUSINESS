@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATBU BINGE MULTI BUSINESS - Fast, Reliable Loans to assist and grow your business.</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            800: '#102a43',
+                            900: '#0b1b2b',
+                        },
+                        emeraldCustom: {
+                            500: '#059669',
+                            600: '#047857',
+                            700: '#065f46',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Customizations */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #059669;
+            cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2);
+            transition: all 0.2s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 0 6px rgba(5, 150, 105, 0.3);
+        }
+        .modal-blur {
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="font-sans bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- ================= HEADER & NAVIGATION ================= -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-navy-900 to-emerald-600 flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        AB
+                    </div>
+                    <div>
+                        <span class="text-lg sm:text-xl font-extrabold text-navy-900 tracking-tight block leading-tight">
+                            ATBU BINGE
+                        </span>
+                        <span class="text-xs font-semibold text-emerald-600 tracking-widest uppercase block">
+                            Multi Business
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600 text-sm">
+                    <a href="#home" class="hover:text-emerald-600 transition-colors">Home</a>
+                    <a href="#products" class="hover:text-emerald-600 transition-colors">Loan Products</a>
+                    <a href="#calculator" class="hover:text-emerald-600 transition-colors">Loan Calculator</a>
+                    <a href="#how-it-works" class="hover:text-emerald-600 transition-colors">How It Works</a>
+                    <a href="#about" class="hover:text-emerald-600 transition-colors">About Us</a>
+                    <a href="#contact 08061139747" class="hover:text-emerald-600 transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA & Mobile Toggle -->
+                <div class="flex items-center space-x-4">
+                    <a id="navAccount" href="#" onclick="handleAccountClick(event)" class="hidden sm:inline-flex text-sm font-semibold text-slate-600 hover:text-emerald-600">Login</a>
+                    <button onclick="openApplyModal()" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-semibold rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all">
+                        Apply Now <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                    </button>
+                    <!-- Mobile Hamburger -->
+                    <button id="mobileMenuBtn" class="md:hidden text-slate-600 hover:text-navy-900 p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="block py-2 text-slate-600 font-medium hover:text-emerald-600" onclick="toggleMobileMenu()">Home</a>
+            <a href="#products" class="block py-2 text-slate-600 font-medium hover:text-emerald-600" onclick="toggleMobileMenu()">Loan Products</a>
+            <a href="#calculator" class="block py-2 text-slate-600 font-medium hover:text-emerald-600" onclick="toggleMobileMenu()">Loan Calculator</a>
+            <a href="#how-it-works" class="block py-2 text-slate-600 font-medium hover:text-emerald-600" onclick="toggleMobileMenu()">How It Works</a>
+            <a href="#about" class="block py-2 text-slate-600 font-medium hover:text-emerald-600" onclick="toggleMobileMenu()">About Us</a>
+            <a href="#contact" class="block py-2 text-slate-600 font-medium hover:text-emerald-600" onclick="toggleMobileMenu()">Contact</a>
+            <button onclick="openApplyModal(); toggleMobileMenu();" class="w-full mt-2 py-3 bg-emerald-600 text-white rounded-xl font-semibold shadow-md">
+                Apply Now
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="home" class="relative bg-gradient-to-b from-navy-900 via-navy-800 to-slate-900 text-white pt-16 pb-24 overflow-hidden">
+        <!-- Decorative Background Accents -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 px-3.5 py-1.5 rounded-full text-emerald-400 text-xs font-semibold uppercase tracking-wide">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Licensed & Trusted Financial Partner</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-white">
+                        Fast, Reliable & Flexible <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
+                            Financial Solutions
+                        </span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Empowering students, entrepreneurs, and businesses across Nigeria with low-interest loans, quick approvals, and zero hidden fees.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="openApplyModal()" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-xl shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5">
+                            Apply for a Loan Now
+                        </button>
+                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-semibold rounded-xl backdrop-blur-sm transition-all text-center">
+                            Calculate Loan
+                        </a>
+                    </div>
+
+                    <!-- Key Highlights Grid -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-700/60 max-w-lg mx-auto lg:mx-0">
+                        <div class="text-center lg:text-left">
+                            <p class="text-emerald-400 font-bold text-xl sm:text-2xl">2.5%</p>
+                            <p class="text-xs text-slate-400 font-medium">Low Interest Rate</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <p class="text-emerald-400 font-bold text-xl sm:text-2xl">24 Hours</p>
+                            <p class="text-xs text-slate-400 font-medium">Fast Disbursement</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <p class="text-emerald-400 font-bold text-xl sm:text-2xl">₦0</p>
+                            <p class="text-xs text-slate-400 font-medium">Hidden Charges</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Image/Graphic -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-gradient-to-tr from-slate-800 to-slate-800/80 p-6 sm:p-8 rounded-3xl border border-slate-700/80 shadow-2xl backdrop-blur-md">
+                        <!-- Card Badge -->
+                        <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">Instant Credit Limit</h4>
+                                    <p class="text-xs text-slate-400">Pre-approved access</p>
+                                </div>
+                            </div>
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full border border-emerald-500/20">Active</span>
+                        </div>
+
+                        <!-- Card Amount Display -->
+                        <div class="mb-6">
+                            <p class="text-xs uppercase tracking-wider text-slate-400 mb-1">Max Disbursement</p>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold text-white">₦5,000,000.00</h3>
+                        </div>
+
+                        <!-- Feature Checklist -->
+                        <ul class="space-y-3 mb-6 text-sm text-slate-300">
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>No collateral required for micro-loans</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Flexible terms from 1 to 24 months</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Direct transfer to your Bank Account</span>
+                            </li>
+                        </ul>
+
+                        <button onclick="openApplyModal()" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-navy-900 font-extrabold rounded-xl hover:brightness-110 transition-all shadow-lg">
+                            Get Started Instantly
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= INTERACTIVE LOAN CALCULATOR ================= -->
+    <section id="calculator" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-extrabold text-emerald-600 uppercase tracking-widest mb-2">Estimate Your Repayment</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-navy-900">Interactive Loan Calculator</p>
+                <p class="mt-3 text-slate-600">Adjust the slider values to customize your loan package and see exact monthly estimates instantly.</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden grid lg:grid-cols-12">
+                
+                <!-- Calculator Controls (Left 7 Cols) -->
+                <div class="lg:col-span-7 p-6 sm:p-10 space-y-8">
+                    
+                    <!-- Slider 1: Loan Amount -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <label class="font-semibold text-slate-700 text-sm sm:text-base">Desired Loan Amount</label>
+                            <span id="amountDisplay" class="text-xl sm:text-2xl font-extrabold text-emerald-600 bg-emerald-50 px-4 py-1 rounded-lg border border-emerald-200">
+                                ₦250,000
+                            </span>
+                        </div>
+                        <input type="range" id="loanAmount" min="10000" max="5000000" step="10000" value="250000" 
+                            class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                        <div class="flex justify-between text-xs font-semibold text-slate-400">
+                            <span>₦10,000</span>
+                            <span>₦2,500,000</span>
+                            <span>₦5,000,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 2: Duration -->
+                    <div class="space-y-3 pt-4">
+                        <div class="flex justify-between items-center">
+                            <label class="font-semibold text-slate-700 text-sm sm:text-base">Repayment Duration</label>
+                            <span id="durationDisplay" class="text-xl sm:text-2xl font-extrabold text-emerald-600 bg-emerald-50 px-4 py-1 rounded-lg border border-emerald-200">
+                                6 Months
+                            </span>
+                        </div>
+                        <input type="range" id="loanDuration" min="1" max="24" step="1" value="6" 
+                            class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                        <div class="flex justify-between text-xs font-semibold text-slate-400">
+                            <span>1 Month</span>
+                            <span>12 Months</span>
+                            <span>24 Months</span>
+                        </div>
+                    </div>
+
+                    <!-- Interest Badge Note -->
+                    <div class="flex items-center space-x-3 bg-blue-50 p-4 rounded-2xl border border-blue-100 text-blue-900 text-sm">
+                        <i class="fa-solid fa-circle-info text-blue-600 text-lg"></i>
+                        <p class="leading-snug">
+                            Standard interest rate applied: <strong class="font-bold">2.5% monthly</strong>. Rates may vary slightly based on loan product profile.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Calculator Results Summary (Right 5 Cols) -->
+                <div class="lg:col-span-5 bg-navy-900 text-white p-6 sm:p-10 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold mb-6 text-slate-100 border-b border-slate-700 pb-4">
+                            Repayment Breakdown
+                        </h3>
+
+                        <div class="space-y-5">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 text-sm">Monthly Repayment:</span>
+                                <span id="monthlyPayment" class="text-2xl sm:text-3xl font-extrabold text-emerald-400">₦0.00</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t border-slate-800 pt-3">
+                                <span class="text-slate-400 text-sm">Monthly Interest Rate:</span>
+                                <span class="font-semibold text-slate-200">2.5%</span>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400 text-sm">Total Interest Payable:</span>
+                                <span id="totalInterest" class="font-semibold text-slate-200">₦0.00</span>
+                            </div>
+
+                            <div class="flex justify-between items-center border-t border-slate-800 pt-3">
+                                <span class="text-slate-300 font-semibold text-base">Total Repayment Amount:</span>
+                                <span id="totalRepayment" class="text-xl font-extrabold text-white">₦0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <button onclick="applyCalculatedLoan()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition-all text-center block">
+                            Apply for This Loan
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= LOAN PRODUCTS SECTION ================= -->
+    <section id="products" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-extrabold text-emerald-600 uppercase tracking-widest mb-2">Tailored Financing</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-navy-900">Explore Our Loan Products</p>
+                <p class="mt-3 text-slate-600">Choose from structured loan categories engineered to meet your specific individual or enterprise requirements.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Product 1 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Business Expansion Loan</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                            Capital investment to scale operations, acquire inventory, or expand workspace facilities.
+                        </p>
+                        <ul class="text-xs text-slate-500 space-y-2 mb-6 border-t border-slate-200 pt-4">
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Up to ₦5,000,000</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Tenure: 6 - 24 Months</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Competitive interest rates</li>
+                        </ul>
+                    </div>
+                    <button onclick="openApplyModal('Business Expansion Loan')" class="w-full py-3 bg-white border border-slate-300 text-navy-900 font-bold rounded-xl hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all text-sm">
+                        Apply Now
+                    </button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Student & Academic Loan</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                            Tailored tuition assistance and project funding designed specifically for ATBU & university students.
+                        </p>
+                        <ul class="text-xs text-slate-500 space-y-2 mb-6 border-t border-slate-200 pt-4">
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Up to ₦250,000</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Flexible term options</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Minimal documentation</li>
+                        </ul>
+                    </div>
+                    <button onclick="openApplyModal('Student & Academic Loan')" class="w-full py-3 bg-white border border-slate-300 text-navy-900 font-bold rounded-xl hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all text-sm">
+                        Apply Now
+                    </button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-kit-medical"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">Personal Emergency Loan</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                            Fast disbursement credit line for unforeseen medical, family, or urgent personal expenses.
+                        </p>
+                        <ul class="text-xs text-slate-500 space-y-2 mb-6 border-t border-slate-200 pt-4">
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Up to ₦500,000</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Same-day approval</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>No guarantor required</li>
+                        </ul>
+                    </div>
+                    <button onclick="openApplyModal('Personal Emergency Loan')" class="w-full py-3 bg-white border border-slate-300 text-navy-900 font-bold rounded-xl hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all text-sm">
+                        Apply Now
+                    </button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-navy-900 mb-2">SME Working Capital</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                            Sustain cash flow, pay payroll, or purchase raw materials to keep your enterprise thriving.
+                        </p>
+                        <ul class="text-xs text-slate-500 space-y-2 mb-6 border-t border-slate-200 pt-4">
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Up to ₦3,000,000</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Customized repayment structure</li>
+                            <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Dedicated loan manager</li>
+                        </ul>
+                    </div>
+                    <button onclick="openApplyModal('SME Working Capital Loan')" class="w-full py-3 bg-white border border-slate-300 text-navy-900 font-bold rounded-xl hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all text-sm">
+                        Apply Now
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS SECTION ================= -->
+    <section id="how-it-works" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest mb-2">Simple 4-Step Process</h2>
+                <p class="text-3xl sm:text-4xl font-bold">How To Get Your Loan</p>
+                <p class="mt-3 text-slate-400">Our streamlined digital application ensures quick feedback with zero tedious paperwork.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                
+                <!-- Step 1 -->
+                <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/80 relative text-center">
+                    <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-lg mx-auto mb-4 shadow-lg shadow-emerald-600/30">
+                        1
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Select Loan Amount</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Choose your required capital and duration using our transparent calculator.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/80 relative text-center">
+                    <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-lg mx-auto mb-4 shadow-lg shadow-emerald-600/30">
+                        2
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Fill Application Form</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Provide basic personal details, NIN/BVN, and required documentation online.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/80 relative text-center">
+                    <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-lg mx-auto mb-4 shadow-lg shadow-emerald-600/30">
+                        3
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Quick Verification</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Our automated system and officers assess your application rapidly.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-800/60 p-6 rounded-2xl border border-slate-700/80 relative text-center">
+                    <div class="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-lg mx-auto mb-4 shadow-lg shadow-emerald-600/30">
+                        4
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Receive Funds</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Approved loan amounts are disbursed directly to your designated bank account.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT US & TRUST BADGES ================= -->
+    <section id="about" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <h2 class="text-xs font-extrabold text-emerald-600 uppercase tracking-widest">About ATBU BINGE MULTI BUSINESS</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-navy-900 leading-tight">
+                        Empowering Communities with Accessible Financial Growth
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        At ATBU BINGE MULTI BUSINESS, we believe access to credit is fundamental to innovation and individual financial stability. Founded with a vision to streamline lending, we eliminate bureaucratic roadblocks to provide fast, reliable loans.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Whether you are a student financing your educational milestones, a entrepreneur expanding your retail footprint, or an enterprise managing cash cycles, we stand by you with integrity and speed.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <i class="fa-solid fa-lock text-emerald-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Secure & Confidential</h4>
+                            <p class="text-xs text-slate-500 mt-1">256-bit bank grade encryption for all data</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <i class="fa-solid fa-headset text-emerald-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">24/7 Support</h4>
+                            <p class="text-xs text-slate-500 mt-1">Responsive customer support team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metrics & Stats -->
+                <div class="lg:col-span-6">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-navy-900 text-white p-8 rounded-3xl text-center space-y-2 shadow-xl">
+                            <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400">₦500M+</p>
+                            <p class="text-xs uppercase tracking-wider text-slate-300 font-semibold">Disbursed Capital</p>
+                        </div>
+
+                        <div class="bg-emerald-600 text-white p-8 rounded-3xl text-center space-y-2 shadow-xl">
+                            <p class="text-3xl sm:text-4xl font-extrabold">10,000+</p>
+                            <p class="text-xs uppercase tracking-wider text-emerald-100 font-semibold">Happy Clients</p>
+                        </div>
+
+                        <div class="bg-white text-navy-900 p-8 rounded-3xl text-center space-y-2 shadow-xl border border-slate-200">
+                            <p class="text-3xl sm:text-4xl font-extrabold text-navy-900">98%</p>
+                            <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Approval Rate</p>
+                        </div>
+
+                        <div class="bg-slate-200 text-navy-900 p-8 rounded-3xl text-center space-y-2 shadow-xl border border-slate-300">
+                            <p class="text-3xl sm:text-4xl font-extrabold text-navy-900">15 Mins</p>
+                            <p class="text-xs uppercase tracking-wider text-slate-600 font-semibold">Avg. Review Time</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-extrabold text-emerald-600 uppercase tracking-widest mb-2">Client Success</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-navy-900">What Our Borrowers Say</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                        "ATBU BINGE MULTI BUSINESS saved my final year project! The student loan was approved within hours with no hassle."
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">
+                            AB
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-navy-900">Abubakar Bello</h5>
+                            <p class="text-xs text-slate-500">Student, Bauchi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                        "The business expansion loan enabled me to double my shop inventory right before the festive season. Fantastic rate!"
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">
+                            MO
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-navy-900">Maryam Usman</h5>
+                            <p class="text-xs text-slate-500">Retail Merchant</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                        "Extremely transparent. No hidden charges or strange deductions. The repayment schedule was super easy to track."
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">
+                            CI
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-bold text-navy-900">Chidi Ibrahim</h5>
+                            <p class="text-xs text-slate-500">SME Operator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-navy-900">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full text-left p-5 font-semibold text-navy-900 flex justify-between items-center focus:outline-none">
+                        <span>What are the minimum requirements to apply?</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-1" class="hidden p-5 pt-0 text-slate-600 text-sm border-t border-slate-100">
+                        You need a valid government-issued ID, a Bank Verification Number (BVN) or NIN, proof of steady income/student status, and a active bank account.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full text-left p-5 font-semibold text-navy-900 flex justify-between items-center focus:outline-none">
+                        <span>How fast is the loan disbursed?</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-2" class="hidden p-5 pt-0 text-slate-600 text-sm border-t border-slate-100">
+                        Once your application is submitted with valid documentation, verification takes between 15 minutes to 24 hours. Upon approval, funds are immediately disbursed.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full text-left p-5 font-semibold text-navy-900 flex justify-between items-center focus:outline-none">
+                        <span>Are there any hidden processing charges?</span>
+                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-3" class="hidden p-5 pt-0 text-slate-600 text-sm border-t border-slate-100">
+                        No. ATBU BINGE MULTI BUSINESS adheres strictly to transparent financial lending. All terms, including interest rates and total repayment, are shown upfront before you accept.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT SECTION & FOOTER ================= -->
+    <footer id="contact" class="bg-navy-900 text-white pt-20 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 pb-16 border-b border-slate-800">
+                
+                <!-- Contact Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-white">
+                            AB
+                        </div>
+                        <span class="text-xl font-extrabold tracking-tight">
+                            ATBU BINGE MULTI BUSINESS
+                        </span>
+                    </div>
+
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Your trusted destination for accessible financial solutions, personal support, and business loan capital.
+                    </p>
+
+                    <div class="space-y-4 text-sm text-slate-300">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-emerald-400 mt-1"></i>
+                            <span>number 7 ATBU Main Campus Area, Bauchi State, Nigeria</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-envelope text-emerald-400"></i>
+                            <span>support@atbubingemulti.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-phone text-emerald-400"></i>
+                            <span>+234 (0) 8069260730</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7 bg-slate-800/80 p-8 rounded-3xl border border-slate-700/80">
+                    <h3 class="text-xl font-bold mb-4">Send Us a Message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1">Your Name</label>
+                                <input type="text" required placeholder="John Doe" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1">Email Address</label>
+                                <input type="email" required placeholder="john@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Message Topic</label>
+                            <input type="text" placeholder="Loan Inquiry" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Your Message</label>
+                            <textarea rows="3" required placeholder="How can we help you?" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 gap-4">
+                <p>&copy; <span id="currentYear"></span> ATBU BINGE MULTI BUSINESS. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-emerald-400 transition-colors">Terms & Conditions</a>
+                    <a href="#" class="hover:text-emerald-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-emerald-400 transition-colors">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ================= APPLICATION FORM MODAL ================= -->
+    <div id="applyModal" class="fixed inset-0 z-50 hidden overflow-y-auto modal-blur bg-slate-900/70 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-slate-100">
+            
+            <!-- Close Button -->
+            <button onclick="closeApplyModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-xl w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-6">
+                <h3 class="text-2xl font-extrabold text-navy-900">Loan Application</h3>
+                <p class="text-xs sm:text-sm text-slate-500">Complete the form below to initiate your loan request.</p>
+            </div>
+
+            <!-- Application Form -->
+            <form onsubmit="handleApplicationSubmit(event)" class="space-y-4">
+                
+                <!-- Personal Info -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                        <input type="text" required id="appName" placeholder="e.g. Maryam Abubakar" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Email Address *</label>
+                        <input type="email" required id="appEmail" placeholder="maryam@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number *</label>
+                        <input type="tel" required id="appPhone" placeholder="08012345678" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">NIN / BVN Number *</label>
+                        <input type="text" maxlength="11" required id="appIdNumber" inputmode="numeric" pattern="[0-9]{11}" placeholder="11-digit Number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <!-- Bank Details (where the loan will be sent) -->
+                <div>
+                    <p class="text-xs font-bold text-slate-700 mb-2">Bank details (where we send the money)</p>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Bank Name *</label>
+                            <input type="text" required id="appBank" placeholder="e.g. GTBank" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Account Name *</label>
+                            <input type="text" required id="appAccName" placeholder="Name on account" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Account Number *</label>
+                            <input type="text" required id="appAccNumber" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" placeholder="10 digits" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category & Amount -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Loan Category *</label>
+                        <select id="modalLoanSelect" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                            <option value="Business Expansion Loan">Business Expansion Loan</option>
+                            <option value="Student & Academic Loan">Student & Academic Loan</option>
+                            <option value="Personal Emergency Loan">Personal Emergency Loan</option>
+                            <option value="SME Working Capital Loan">SME Working Capital Loan</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Employment / Business Status *</label>
+                        <select id="appEmployment" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                            <option value="Self Employed / Business">Self Employed / Business</option>
+                            <option value="Student">Student</option>
+                            <option value="Salary Earner">Salary Earner</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Requested Amount (₦) *</label>
+                        <input type="number" id="modalAmountInput" min="10000" max="5000000" required placeholder="250000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Duration (Months) *</label>
+                        <input type="number" id="modalDurationInput" min="1" max="24" required placeholder="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <!-- Document Upload Box Placeholder -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Upload ID / Supporting Document (Optional)</label>
+                    <div onclick="document.getElementById('fileUpload').click()" class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center cursor-pointer hover:border-emerald-500 transition-colors bg-slate-50">
+                        <i class="fa-solid fa-cloud-arrow-up text-2xl text-slate-400 mb-1"></i>
+                        <p class="text-xs text-slate-500">Click or drag files here (ID card, Admission letter, or Bank Statement)</p>
+                        <input type="file" class="hidden" id="fileUpload" accept="image/*,.pdf" onchange="document.getElementById('fileName').textContent = this.files[0] ? this.files[0].name : ''">
+                        <p id="fileName" class="text-xs text-emerald-600 font-semibold mt-1"></p>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <p id="appMsg" class="text-sm text-red-600 mb-2 hidden"></p>
+                    <button id="appSubmitBtn" type="submit" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition-all text-sm disabled:opacity-60">
+                        Submit Loan Request
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <!-- ================= AUTH MODAL ================= -->
+    <div id="authModal" class="fixed inset-0 z-[60] hidden modal-blur bg-slate-900/70 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="authTitle" class="text-2xl font-extrabold text-navy-900 mb-1">Log in</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mb-5">You need an account to apply and track your loan.</p>
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-3">
+                <div id="authNameWrap" class="hidden">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                    <input id="authName" type="text" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email</label>
+                    <input id="authEmail" type="email" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Password</label>
+                    <input id="authPassword" type="password" minlength="6" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                </div>
+                <p id="authMsg" class="text-sm text-red-600 hidden"></p>
+                <button id="authBtn" type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm disabled:opacity-60">Log in</button>
+            </form>
+            <p class="text-xs text-slate-500 mt-4 text-center">
+                <span id="authSwitchText">No account yet?</span>
+                <a href="#" onclick="toggleAuthMode(event)" id="authSwitchLink" class="text-emerald-600 font-semibold">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Set Copyright Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Calculator DOM Elements
+        const amountSlider = document.getElementById('loanAmount');
+        const durationSlider = document.getElementById('loanDuration');
+        const amountDisplay = document.getElementById('amountDisplay');
+        const durationDisplay = document.getElementById('durationDisplay');
+        
+        const monthlyPaymentDisplay = document.getElementById('monthlyPayment');
+        const totalInterestDisplay = document.getElementById('totalInterest');
+        const totalRepaymentDisplay = document.getElementById('totalRepayment');
+
+        // Modal Elements
+        const applyModal = document.getElementById('applyModal');
+        const modalLoanSelect = document.getElementById('modalLoanSelect');
+        const modalAmountInput = document.getElementById('modalAmountInput');
+        const modalDurationInput = document.getElementById('modalDurationInput');
+
+        const monthlyInterestRate = 0.025; // 2.5% per month
+
+        // Format Currency in Nigerian Naira
+        function formatNaira(val) {
+            return new Intl.NumberFormat('en-NG', {
+                style: 'currency',
+                currency: 'NGN',
+                maximumFractionDigits: 2
+            }).format(val).replace('NGN', '₦');
+        }
+
+        // Calculate Repayments
+        function calculateLoan() {
+            const principal = parseFloat(amountSlider.value);
+            const months = parseInt(durationSlider.value);
+
+            // Calculate Simple Interest for specified period
+            const totalInterest = principal * monthlyInterestRate * months;
+            const totalRepayment = principal + totalInterest;
+            const monthlyPayment = totalRepayment / months;
+
+            // Render updates
+            amountDisplay.textContent = formatNaira(principal);
+            durationDisplay.textContent = `${months} ${months === 1 ? 'Month' : 'Months'}`;
+
+            monthlyPaymentDisplay.textContent = formatNaira(monthlyPayment);
+            totalInterestDisplay.textContent = formatNaira(totalInterest);
+            totalRepaymentDisplay.textContent = formatNaira(totalRepayment);
+        }
+
+        // Event Listeners for Sliders
+        amountSlider.addEventListener('input', calculateLoan);
+        durationSlider.addEventListener('input', calculateLoan);
+
+        // Initialize Calculator on Load
+        calculateLoan();
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+        // Modal Toggle Logic
+        async function openApplyModal(selectedProduct = null) {
+            const { data: { session } } = await db.auth.getSession();
+            if (!session) { pendingApply = selectedProduct || true; openAuthModal('login'); return; }
+            applyModal.classList.remove('hidden');
+            document.getElementById('appEmail').value = session.user.email;
+            const nm = session.user.user_metadata && session.user.user_metadata.full_name;
+            if (nm && !document.getElementById('appName').value) document.getElementById('appName').value = nm;
+            document.body.style.overflow = 'hidden';
+
+            if (selectedProduct) {
+                modalLoanSelect.value = selectedProduct;
+            }
+            // Sync values from calculator
+            modalAmountInput.value = amountSlider.value;
+            modalDurationInput.value = durationSlider.value;
+        }
+
+        function closeApplyModal() {
+            applyModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Apply with current calculator configuration
+        function applyCalculatedLoan() {
+            openApplyModal();
+        }
+
+        // ---------- Supabase ----------
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let pendingApply = null;
+        let authMode = 'login';
+
+        function openAuthModal(mode) { setAuthMode(mode); document.getElementById('authModal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+        function setAuthMode(mode) {
+            authMode = mode;
+            const signup = mode === 'signup';
+            document.getElementById('authTitle').textContent = signup ? 'Create account' : 'Log in';
+            document.getElementById('authBtn').textContent = signup ? 'Sign up' : 'Log in';
+            document.getElementById('authNameWrap').classList.toggle('hidden', !signup);
+            document.getElementById('authSwitchText').textContent = signup ? 'Already have an account?' : 'No account yet?';
+            document.getElementById('authSwitchLink').textContent = signup ? 'Log in' : 'Sign up';
+            document.getElementById('authMsg').classList.add('hidden');
+        }
+        function toggleAuthMode(e) { e.preventDefault(); setAuthMode(authMode === 'login' ? 'signup' : 'login'); }
+        function showAuthMsg(t, ok) {
+            const m = document.getElementById('authMsg');
+            m.textContent = t; m.classList.remove('hidden');
+            m.className = 'text-sm ' + (ok ? 'text-emerald-600' : 'text-red-600');
+        }
+
+        async function handleAuthSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const btn = document.getElementById('authBtn');
+            btn.disabled = true;
+            let res;
+            if (authMode === 'signup') {
+                const full_name = document.getElementById('authName').value.trim();
+                res = await db.auth.signUp({ email, password, options: { data: { full_name } } });
+                if (!res.error && !res.data.session) {
+                    btn.disabled = false;
+                    return showAuthMsg('Account created. Check your email to confirm, then log in.', true);
+                }
+            } else {
+                res = await db.auth.signInWithPassword({ email, password });
+            }
+            btn.disabled = false;
+            if (res.error) return showAuthMsg(res.error.message, false);
+            closeAuthModal();
+            refreshNav();
+            if (pendingApply) { const p = pendingApply; pendingApply = null; openApplyModal(p === true ? null : p); }
+        }
+
+        async function refreshNav() {
+            const { data: { session } } = await db.auth.getSession();
+            document.getElementById('navAccount').textContent = session ? 'My Account' : 'Login';
+        }
+        async function handleAccountClick(e) {
+            e.preventDefault();
+            const { data: { session } } = await db.auth.getSession();
+            if (session) window.location.href = 'account.html'; else openAuthModal('login');
+        }
+        refreshNav();
+
+        // Submit Loan Application
+        async function handleApplicationSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('appSubmitBtn');
+            const msg = document.getElementById('appMsg');
+            msg.classList.add('hidden');
+            btn.disabled = true; btn.textContent = 'Submitting...';
+            try {
+                const { data: { user } } = await db.auth.getUser();
+                if (!user) throw new Error('Please log in first.');
+
+                const amount = parseFloat(modalAmountInput.value);
+                const months = parseInt(modalDurationInput.value);
+                const total = amount + amount * monthlyInterestRate * months;
+
+                let document_path = null;
+                const file = document.getElementById('fileUpload').files[0];
+                if (file) {
+                    if (file.size > 5 * 1024 * 1024) throw new Error('File must be under 5MB.');
+                    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                    document_path = `${user.id}/${Date.now()}_${safe}`;
+                    const up = await db.storage.from('loan-docs').upload(document_path, file);
+                    if (up.error) throw up.error;
+                }
+
+                const { error } = await db.from('loan_requests').insert({
+                    user_id: user.id,
+                    full_name: document.getElementById('appName').value.trim(),
+                    email: document.getElementById('appEmail').value.trim(),
+                    phone: document.getElementById('appPhone').value.trim(),
+                    id_number: document.getElementById('appIdNumber').value.trim(),
+                    bank_name: document.getElementById('appBank').value.trim(),
+                    account_name: document.getElementById('appAccName').value.trim(),
+                    account_number: document.getElementById('appAccNumber').value.trim(),
+                    category: modalLoanSelect.value,
+                    employment_status: document.getElementById('appEmployment').value,
+                    amount, duration_months: months,
+                    total_repayment: total,
+                    document_path
+                });
+                if (error) throw error;
+
+                e.target.reset();
+                document.getElementById('fileName').textContent = '';
+                closeApplyModal();
+                if (confirm('Your loan request has been received! Go to your account to track it?')) window.location.href = 'account.html';
+            } catch (err) {
+                msg.textContent = err.message || 'Something went wrong. Try again.';
+                msg.classList.remove('hidden');
+            } finally {
+                btn.disabled = false; btn.textContent = 'Submit Loan Request';
+            }
+        }
+
+        // Contact Form Submission
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for contacting ATBU BINGE MULTI BUSINESS! We have received your inquiry and will respond within 24 hours.');
+            e.target.reset();
+        }
+
+        // FAQ Toggle Logic
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                answer.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>
